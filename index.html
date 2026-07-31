@@ -50,43 +50,21 @@
       line-height: 1.6;
     }
 
-    /* ── Photo slot ── */
-    .photo-slot {
+    /* ── Image styles ── */
+    .stage-img {
       width: 160px;
       height: 160px;
       border-radius: 20px;
-      border: 3px dashed #c4a0f0;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ede0ff, #ddc8ff);
-      cursor: pointer;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .photo-slot img {
-      width: 100%; height: 100%;
       object-fit: cover;
-      display: none;
+      border: 3px solid #c4a0f0;
+      display: block;
     }
-    .photo-slot .placeholder-text {
-      font-size: 0.8rem;
-      color: #9060b0;
-      font-weight: 700;
-      text-align: center;
-      padding: 0.5rem;
-      pointer-events: none;
+
+    .stage-img.circle {
+      border-radius: 50%;
+      width: 180px;
+      height: 180px;
     }
-    .photo-slot input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-    .photo-slot.circle { border-radius: 50%; width: 180px; height: 180px; }
 
     .btn {
       padding: 0.8rem 2.2rem;
@@ -141,10 +119,23 @@
       height: 60px;
     }
 
-    /* ── Food & drink grid ── */
     .food-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .drink-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .place-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       width: 100%;
     }
@@ -164,22 +155,6 @@
     }
     .food-btn:hover { background: #f3e8ff; border-color: #a855f7; transform: scale(1.04); }
     .food-btn.selected { background: linear-gradient(135deg,#a855f7,#7c3aed); border-color: #6d28d9; color: white; transform: scale(1.06); }
-
-    /* drink grid — 3 cols */
-    .drink-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: 100%;
-    }
-
-    /* place grid — wrap nicely */
-    .place-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      width: 100%;
-    }
 
     .section-label {
       font-weight: 800;
@@ -217,6 +192,15 @@
       display: none;
     }
     .error-msg.show { display: block; }
+
+    .grid-error {
+      color: #ff2255;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: none;
+      align-self: flex-start;
+    }
+    .grid-error.show { display: block; }
 
     .hearts { font-size: 2.5rem; margin-top: 0.5rem; }
 
@@ -268,15 +252,6 @@
 
     .butterfly-row { font-size: 2rem; letter-spacing: 6px; }
 
-    .grid-error {
-      color: #ff2255;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: none;
-      align-self: flex-start;
-    }
-    .grid-error.show { display: block; }
-
     .divider {
       width: 100%;
       border: none;
@@ -292,14 +267,10 @@
   <!-- ══ STAGE 1: The Ask ══ -->
   <div class="stage active fade-in" id="stage1">
     <div class="butterfly-row">🦋🦋🦋</div>
-    <div class="title">🦋 Will you go on a date with me, Judi? 🦋</div>
+    <div class="title">🦋 Will you go on a date with me, Judi/Nayo? 🦋</div>
 
-    <!-- Photo slot — click to upload any image -->
-    <div class="photo-slot" id="photoSlot1" title="Tap to add a photo">
-      <input type="file" accept="image/*" onchange="loadPhoto(event,'photoSlot1')">
-      <img id="photoSlot1img" alt="your photo">
-      <div class="placeholder-text" id="photoSlot1text">🦋<br>Tap to add<br>a cute photo!</div>
-    </div>
+    <!-- ADD YOUR IMAGE SOURCE IN src="" BELOW -->
+    <img class="stage-img" src="" alt="cute photo" />
 
     <div class="btn-row">
       <button class="btn btn-yes" onclick="goToStage2()">YES 💗</button>
@@ -314,18 +285,17 @@
   <div class="stage" id="stage2">
     <div class="butterfly-row">🦋🦋🦋</div>
     <div class="title">WAIT MY BUTTERFLY JUDI ACTUALLY SAID YES?? 😭</div>
-    <div class="photo-slot" id="photoSlot2" title="Tap to add a photo">
-      <input type="file" accept="image/*" onchange="loadPhoto(event,'photoSlot2')">
-      <img id="photoSlot2img" alt="your photo">
-      <div class="placeholder-text" id="photoSlot2text">🦋<br>Tap to add<br>a funny gif/photo!</div>
-    </div>
+
+    <!-- ADD YOUR IMAGE SOURCE IN src="" BELOW -->
+    <img class="stage-img" src="" alt="funny reaction" />
+
     <div class="subtitle">okay okay okay okay okay... 🦋</div>
     <button class="btn btn-primary" onclick="goToStage3()">okay okay! ✨</button>
   </div>
 
   <!-- ══ STAGE 3: Logistics ══ -->
   <div class="stage" id="stage3">
-    <div class="title">So... when are you free, Judi 🦋</div>
+    <div class="title">So... when are you free, Judi/Nayo? 🦋</div>
     <div class="form-group">
       <label for="dateInput">Pick a Day</label>
       <input type="date" id="dateInput" />
@@ -352,16 +322,16 @@
 
   <!-- ══ STAGE 4: Food & Drink ══ -->
   <div class="stage" id="stage4">
-    <div class="title">What are we feeling, Judi 🍽️✨</div>
+    <div class="title">What are we feeling, Judi? 🍽️✨</div>
     <div class="choc-banner">🍫 chocolate dessert is already on the menu for you 🍫</div>
 
     <div class="section-label">🍖 What are we eating?</div>
     <div class="food-grid">
       <button class="food-btn" onclick="selectFood(this)">🥩<br>Tibs</button>
-      <button class="food-btn" onclick="selectFood(this)">🥩<br>Dulet</button>
+      <button class="food-btn" onclick="selectFood(this)">🫀<br>Dulet</button>
       <button class="food-btn" onclick="selectFood(this)">🥩<br>Kitfo</button>
       <button class="food-btn" onclick="selectFood(this)">🍗<br>Chicken</button>
-      <button class="food-btn" onclick="selectFood(this)">🥩<br>Firfir</button>
+      <button class="food-btn" onclick="selectFood(this)">🫓<br>Firfir</button>
       <button class="food-btn" onclick="selectFood(this)">🍛<br>Shiro</button>
     </div>
     <div class="grid-error" id="foodError">🦋 Please pick something to eat first!</div>
@@ -381,7 +351,6 @@
     <div class="grid-error" id="drinkError">🦋 Please pick or type a drink!</div>
 
     <button class="submit-btn" onclick="goToStage5()">this one! ➔</button>
-    <div class="sending-msg" id="sendingMsg" style="display:none;">sending your picks... 💌</div>
   </div>
 
   <!-- ══ STAGE 5: Place ══ -->
@@ -409,19 +378,18 @@
   <!-- ══ STAGE 6: Final ══ -->
   <div class="stage" id="stage6">
     <div class="butterfly-row">🦋🦋🦋</div>
-    <div class="photo-slot circle" id="photoSlot3" title="Tap to add a photo">
-      <input type="file" accept="image/*" onchange="loadPhoto(event,'photoSlot3')">
-      <img id="photoSlot3img" alt="your photo">
-      <div class="placeholder-text" id="photoSlot3text">🦋<br>Tap to add<br>a fun photo!</div>
-    </div>
+
+    <!-- ADD YOUR IMAGE SOURCE IN src="" BELOW -->
+    <img class="stage-img circle" src="" alt="fun photo" />
+
     <div class="title" style="font-size:1.25rem;">glad you didn't say no, Judi. 🦋</div>
     <div class="subtitle" style="font-size:1.05rem; font-weight:700; color:#7c3aed;">
-      be ready Butteryfly, I'm coming to get you 🚗
+      be ready Butterfly, I'm coming to get you 🚗
     </div>
     <div class="choc-banner" style="font-size:0.9rem;">🍫 I already know you want chocolate. I got you. 🍫</div>
     <div class="ps-text">
       P.S. normal people text. I made a website,<br>
-      during lunch, just for you. no big deal, Judi/Nayo. 🦋
+      during lunch, just for you. no big deal, Judi. 🦋
     </div>
     <div class="hearts">💗💗</div>
   </div>
@@ -442,17 +410,6 @@
 
   // ── Set today as min date ──
   document.getElementById('dateInput').setAttribute('min', new Date().toISOString().split('T')[0]);
-
-  // ── Photo upload ──
-  function loadPhoto(event, slotId) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const img = document.getElementById(slotId + 'img');
-    const txt = document.getElementById(slotId + 'text');
-    img.src = URL.createObjectURL(file);
-    img.style.display = 'block';
-    if (txt) txt.style.display = 'none';
-  }
 
   // ── NO button ──
   const noBtn = document.getElementById('noBtn');
@@ -547,10 +504,10 @@
 
   function goToStage5() {
     let ok = true;
-    if (!selectedFood)  { show('foodError');  ok = false; }
+    if (!selectedFood) { show('foodError'); ok = false; }
     const drinkCustom = document.getElementById('customDrink').value.trim();
     const drinkFinal  = selectedDrink || drinkCustom || null;
-    if (!drinkFinal)    { show('drinkError'); ok = false; }
+    if (!drinkFinal)  { show('drinkError'); ok = false; }
     if (!ok) return;
     selectedDrink = drinkFinal;
     showStage('stage5');
